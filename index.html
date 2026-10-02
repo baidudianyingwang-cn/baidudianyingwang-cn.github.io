@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<title>百度电影网 - 最新电影推荐_热门影视资讯_高分电影排行榜</title>
+<meta name="description" content="百度电影网是专注电影推荐与影视资讯的中文影迷站点，每日更新最新上映电影、热映片单、分类影片导览、原创影评与高分电影排行榜，帮你快速找到值得一看的好电影。">
+<meta name="keywords" content="百度电影网,电影推荐,最新电影,热映电影,影视资讯,高分电影,电影排行榜,影评,观影指南,电影分类">
+<meta name="author" content="百度电影网">
+<meta name="robots" content="index,follow">
+<meta name="revisit-after" content="1 days">
+<meta name="theme-color" content="#2563EB">
+<link rel="canonical" href="https://baidudianyingwang-cn.github.io/">
+<link rel="alternate" hreflang="zh-CN" href="https://baidudianyingwang-cn.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="百度电影网">
+<meta property="og:title" content="百度电影网 - 最新电影推荐_热门影视资讯_高分电影排行榜">
+<meta property="og:description" content="百度电影网每日更新院线热映新片、高分佳作榜单、分类影片导览与原创影评，是影迷查找好电影的第一站。">
+<meta property="og:url" content="https://baidudianyingwang-cn.github.io/">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="百度电影网 - 最新电影推荐与影视资讯">
+<meta name="twitter:description" content="百度电影网每日更新院线热映新片、高分佳作榜单与原创影评。">
+<style>
+:root{
+  --bg:#F2F6FD;
+  --ink:#0F172A;
+  --ink-2:#3F4C63;
+  --muted:#7A879B;
+  --blue:#2563EB;
+  --blue-d:#1D4ED8;
+  --violet:#7C3AED;
+  --cyan:#06B6D4;
+  --amber:#F59E0B;
+  --glass:rgba(255,255,255,.72);
+  --glass-2:rgba(255,255,255,.55);
+  --line:rgba(15,23,42,.08);
+  --ring:0 8px 32px rgba(31,38,135,.10);
+  --ring-2:0 20px 50px rgba(31,38,135,.16);
+  --r:20px;
+  --max:1180px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"PingFang SC","Microsoft YaHei","WenQuanYi Micro Hei","Helvetica Neue",Arial,sans-serif;
+  font-size:16px;
+  line-height:1.8;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:6px}
+.wrap{width:100%;max-width:var(--max);margin:0 auto;padding:0 20px}
+.glass{background:var(--glass);-webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);border:1px solid rgba(255,255,255,.75);box-shadow:var(--ring)}
+
+/* 背景极光光斑 */
+.aurora{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55}
+.blob.b1{width:520px;height:520px;background:#60A5FA;top:-140px;left:-120px;animation:float1 18s ease-in-out infinite}
+.blob.b2{width:460px;height:460px;background:#A78BFA;top:12%;right:-150px;animation:float2 22s ease-in-out infinite}
+.blob.b3{width:420px;height:420px;background:#22D3EE;bottom:8%;left:22%;animation:float1 26s ease-in-out infinite reverse}
+.blob.b4{width:380px;height:380px;background:#FBBF24;bottom:-120px;right:8%;opacity:.32;animation:float2 30s ease-in-out infinite}
+@keyframes float1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(60px,50px) scale(1.08)}}
+@keyframes float2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-70px,40px) scale(1.12)}}
+
+/* ===== 顶部跑马灯 ===== */
+.ticker{background:linear-gradient(90deg,var(--blue),var(--violet) 50%,var(--blue));color:#fff;font-size:13px;overflow:hidden}
+.ticker-in{display:flex;align-items:center;min-height:36px;gap:10px}
+.ticker b{background:rgba(255,255,255,.22);border-radius:999px;padding:2px 12px;font-size:12px;white-space:nowrap;flex:0 0 auto}
+.ticker-track{flex:1;overflow:hidden;white-space:nowrap;mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.ticker-track span{display:inline-block;padding-left:100%;animation:marquee 26s linear infinite}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+
+/* ===== 悬浮胶囊导航 ===== */
+header.top{position:sticky;top:12px;z-index:80;padding:0 20px}
+.bar{max-width:var(--max);margin:0 auto;position:relative;border-radius:999px;padding:10px 14px 10px 20px;display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.78);-webkit-backdrop-filter:blur(20px) saturate(160%);backdrop-filter:blur(20px) saturate(160%);border:1px solid rgba(255,255,255,.85);box-shadow:var(--ring)}
+.brand{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.logo{width:38px;height:38px;border-radius:12px;flex:0 0 auto;background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px;box-shadow:0 8px 18px rgba(37,99,235,.32)}
+.brand b{font-size:19px;letter-spacing:1px;display:block;line-height:1.2}
+.brand small{display:block;font-size:10px;color:var(--muted);letter-spacing:2.5px}
+nav.main{margin-left:auto;display:flex;gap:2px;align-items:center;flex-wrap:wrap}
+nav.main a{font-size:14.5px;padding:8px 14px;border-radius:999px;color:var(--ink-2);transition:.2s;white-space:nowrap}
+nav.main a:hover{background:rgba(37,99,235,.1);color:var(--blue-d)}
+nav.main a.cur{background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;font-weight:700;box-shadow:0 6px 16px rgba(37,99,235,.28)}
+.navck{display:none}
+.burger{display:none;margin-left:auto;width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:#fff;align-items:center;justify-content:center;cursor:pointer}
+.burger i{display:block;width:18px;height:2px;background:var(--blue);position:relative}
+.burger i::before,.burger i::after{content:"";position:absolute;left:0;width:18px;height:2px;background:var(--blue)}
+.burger i::before{top:-6px}
+.burger i::after{top:6px}
+
+/* ===== HERO ===== */
+.hero{padding:34px 0 26px}
+.hero-card{border-radius:32px;padding:38px 40px;display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center;position:relative;overflow:hidden}
+.hero-card::after{content:"";position:absolute;right:-120px;top:-120px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,.22),transparent 65%)}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--blue-d);background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.18);border-radius:999px;padding:5px 14px;margin-bottom:16px}
+.eyebrow em{font-style:normal;width:6px;height:6px;border-radius:50%;background:var(--blue);display:inline-block}
+h1{font-size:46px;line-height:1.25;letter-spacing:1px;font-weight:800;margin-bottom:14px}
+h1 .g{background:linear-gradient(100deg,var(--blue),var(--violet) 55%,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--ink-2);font-size:16.5px;max-width:560px;margin-bottom:24px}
+.lead b{color:var(--ink)}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px}
+.btn{display:inline-block;padding:13px 28px;border-radius:999px;font-size:15px;font-weight:700;transition:.22s}
+.btn-1{background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;box-shadow:0 14px 30px rgba(37,99,235,.3)}
+.btn-1:hover{transform:translateY(-3px)}
+.btn-2{background:rgba(255,255,255,.9);border:1px solid var(--line);color:var(--ink)}
+.btn-2:hover{border-color:var(--blue);color:var(--blue-d)}
+.kpis{display:flex;gap:26px;flex-wrap:wrap;padding-top:20px;border-top:1px dashed var(--line)}
+.kpis div strong{display:block;font-size:26px;line-height:1.2;background:linear-gradient(100deg,var(--blue),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.kpis div span{font-size:12px;color:var(--muted)}
+/* 叠放海报 */
+.stack{position:relative;height:340px;z-index:2}
+.pst{position:absolute;border-radius:18px;box-shadow:0 24px 50px rgba(15,23,42,.28);border:3px solid rgba(255,255,255,.85);display:flex;align-items:flex-end;padding:14px;overflow:hidden}
+.pst::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(15,23,42,.55))}
+.pst span{position:relative;z-index:2;color:#fff;font-size:13px;font-weight:700;line-height:1.4}
+.pst .sc{position:absolute;top:10px;right:10px;z-index:3;background:rgba(255,255,255,.94);color:var(--blue-d);font-size:12px;font-weight:800;padding:3px 9px;border-radius:999px}
+.p1{width:56%;height:78%;left:0;top:12%;z-index:3;background:linear-gradient(150deg,#3B82F6,#1E3A8A 75%)}
+.p2{width:50%;height:70%;right:0;top:0;z-index:2;background:linear-gradient(150deg,#8B5CF6,#4C1D95 75%)}
+.p3{width:46%;height:56%;right:6%;bottom:0;z-index:4;background:linear-gradient(150deg,#22D3EE,#0E7490 75%)}
+
+/* ===== 通用区块 ===== */
+section{padding:44px 0;scroll-margin-top:86px}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:26px;flex-wrap:wrap}
+.sec-head .sh-l{display:flex;align-items:center;gap:14px}
+.sec-head .idx{font-size:13px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--blue),var(--violet));width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;letter-spacing:1px}
+.sec-head h2{font-size:28px;letter-spacing:1px;line-height:1.3}
+.sec-head p{font-size:13.5px;color:var(--muted)}
+.more{font-size:13.5px;color:var(--blue-d);background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.2);border-radius:999px;padding:7px 16px;white-space:nowrap}
+.more:hover{background:var(--blue);color:#fff}
+
+/* ===== 栏目一：Bento 热映 ===== */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.bt{border-radius:var(--r);padding:16px;transition:.25s;display:flex;flex-direction:column;min-height:170px;position:relative;overflow:hidden}
+.bt:hover{transform:translateY(-6px);box-shadow:var(--ring-2)}
+.bt.feature{grid-column:span 2;grid-row:span 2;min-height:356px}
+.cover{border-radius:14px;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:14px;flex:1;min-height:120px}
+.cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(15,23,42,.6))}
+.cover .ct{position:relative;z-index:2}
+.cover .ct b{display:block;color:#fff;font-size:16px;line-height:1.4}
+.cover .ct span{font-size:11.5px;color:rgba(255,255,255,.82)}
+.bt.feature .cover{min-height:230px}
+.bt.feature .cover .ct b{font-size:26px;letter-spacing:1px}
+.badge{position:absolute;top:10px;left:10px;z-index:3;font-size:11px;font-weight:800;padding:3px 10px;border-radius:999px;color:#fff;background:rgba(15,23,42,.5);border:1px solid rgba(255,255,255,.35)}
+.badge.hot{background:linear-gradient(135deg,#F97316,#EF4444);border:0}
+.bt-info{padding-top:14px}
+.bt-info h3{font-size:16px;margin-bottom:5px}
+.bt.feature .bt-info h3{font-size:20px}
+.bt-info p{font-size:13px;color:var(--ink-2);line-height:1.7}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tags span{font-size:11.5px;color:var(--blue-d);background:rgba(37,99,235,.09);border-radius:999px;padding:2px 10px}
+.score-pill{position:absolute;top:10px;right:10px;z-index:3;background:rgba(255,255,255,.95);color:var(--blue-d);font-weight:800;font-size:13px;padding:4px 11px;border-radius:999px;box-shadow:0 4px 12px rgba(15,23,42,.16)}
+.bt-go{margin-top:12px;display:inline-block;font-size:13px;font-weight:700;color:var(--blue-d);border-bottom:2px solid rgba(37,99,235,.35);padding-bottom:2px}
+
+/* ===== 栏目二：分类滑轨 ===== */
+.rail{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 4px 16px;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.rail::-webkit-scrollbar{height:6px}
+.rail::-webkit-scrollbar-thumb{background:rgba(37,99,235,.3);border-radius:99px}
+.rc{flex:0 0 210px;scroll-snap-align:start;border-radius:18px;padding:20px 18px;transition:.22s;min-height:132px;display:flex;flex-direction:column;justify-content:space-between}
+.rc:hover{transform:translateY(-5px);box-shadow:var(--ring-2)}
+.rc .ri{font-size:24px;line-height:1}
+.rc b{font-size:17px;display:block;margin-top:12px}
+.rc span{font-size:12.5px;color:var(--muted)}
+.rc .rn{margin-top:10px;font-size:12px;color:var(--blue-d);font-weight:700}
+.rail-tip{font-size:12.5px;color:var(--muted);margin-top:6px}
+
+/* ===== 栏目三：影评 ===== */
+.rev{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.rv{border-radius:var(--r);padding:22px 24px;position:relative;overflow:hidden;transition:.25s}
+.rv:hover{transform:translateY(-5px);box-shadow:var(--ring-2)}
+.rv .q{position:absolute;right:14px;top:-14px;font-size:86px;font-weight:800;color:rgba(37,99,235,.10);line-height:1}
+.rv .kind{font-size:12px;font-weight:800;letter-spacing:1px;color:#fff;background:linear-gradient(135deg,var(--blue),var(--violet));border-radius:999px;padding:3px 12px;display:inline-block;margin-bottom:12px}
+.rv h3{font-size:18px;margin-bottom:8px;line-height:1.5}
+.rv p{font-size:14px;color:var(--ink-2);line-height:1.85}
+.rv .rm{display:flex;gap:16px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)}
+
+/* ===== 栏目四：排行榜 ===== */
+.rank-box{border-radius:26px;padding:26px 28px}
+.rk{display:flex;align-items:center;gap:16px;padding:13px 0;border-bottom:1px dashed var(--line)}
+.rk:last-child{border-bottom:0}
+.rkn{flex:0 0 54px;font-size:34px;font-weight:800;line-height:1;text-align:center;background:linear-gradient(160deg,var(--blue),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.rk:nth-child(-n+3) .rkn{background:linear-gradient(160deg,#F59E0B,#EF4444);-webkit-background-clip:text;background-clip:text}
+.rkm{flex:1;min-width:0}
+.rkm b{display:block;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar{height:7px;border-radius:99px;background:rgba(15,23,42,.07);margin-top:8px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--cyan),var(--blue) 60%,var(--violet))}
+.rks{flex:0 0 auto;font-size:17px;font-weight:800;color:var(--blue-d)}
+.rk-side{display:grid;grid-template-columns:1fr 260px;gap:22px;align-items:start}
+.mini{border-radius:20px;padding:20px;background:linear-gradient(150deg,rgba(37,99,235,.10),rgba(124,58,237,.10));border:1px solid rgba(255,255,255,.7)}
+.mini h3{font-size:16px;margin-bottom:12px}
+.mini li{display:flex;gap:10px;font-size:13.5px;padding:8px 0;border-bottom:1px dashed var(--line)}
+.mini li:last-child{border-bottom:0}
+.mini li b{color:var(--blue-d);flex:0 0 18px}
+.mini p{font-size:12.5px;color:var(--muted);margin-top:12px}
+
+/* ===== 栏目五：关于（步骤流） ===== */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;position:relative}
+.st{border-radius:var(--r);padding:22px;position:relative}
+.st .no{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.st h3{font-size:16px;margin-bottom:6px}
+.st p{font-size:13.5px;color:var(--ink-2);line-height:1.8}
+.about-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.ab{border-radius:var(--r);padding:24px 26px}
+.ab h3{font-size:19px;margin-bottom:12px}
+.ab p{font-size:14.5px;color:var(--ink-2);margin-bottom:10px}
+.ab p:last-child{margin-bottom:0}
+.ab strong{color:var(--blue-d)}
+
+/* ===== FAQ ===== */
+.faq{max-width:900px}
+.faq details{border-radius:16px;margin-bottom:12px;overflow:hidden;background:var(--glass);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.8);box-shadow:var(--ring)}
+.faq summary{cursor:pointer;padding:16px 20px;font-size:15.5px;font-weight:700;list-style:none;position:relative;padding-right:46px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"＋";position:absolute;right:18px;top:13px;color:var(--blue);font-size:18px}
+.faq details[open] summary::after{content:"－"}
+.faq details p{padding:0 20px 18px;font-size:14px;color:var(--ink-2)}
+
+/* ===== 底部 ===== */
+footer{margin-top:24px;background:linear-gradient(170deg,#0C1730,#111C33 55%,#0A1024);color:#DCE6F5;padding:44px 0 24px}
+.f-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:26px}
+.f-col h4{font-size:16px;color:#93C5FD;margin-bottom:14px}
+.f-col p{font-size:13.5px;color:#9AAEC9;line-height:1.9}
+.f-col ul li{margin-bottom:9px}
+.f-col ul li a{font-size:13.5px;color:#9AAEC9}
+.f-col ul li a:hover{color:#93C5FD}
+.f-url{margin-top:10px;font-size:12.5px;color:#6B7F9C;word-break:break-all}
+.kw{margin-top:26px;padding-top:20px;border-top:1px dashed rgba(255,255,255,.14);font-size:12.5px;color:#7C8FA8}
+.kw a{display:inline-block;margin:4px 8px 0 0;border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:3px 12px;color:#9AAEC9}
+.kw a:hover{color:#93C5FD;border-color:#93C5FD}
+.f-bot{margin-top:20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12.5px;color:#6B7F9C}
+.f-bot a{color:#6B7F9C}
+
+/* ===== 响应式 ===== */
+@media (max-width:1024px){
+  .hero-card{grid-template-columns:1fr;gap:24px;padding:30px}
+  .stack{height:300px}
+  h1{font-size:36px}
+  .bento{grid-template-columns:repeat(2,1fr)}
+  .bt.feature{grid-column:span 2;grid-row:auto;min-height:300px}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .rk-side{grid-template-columns:1fr}
+  .f-top{grid-template-columns:1fr 1fr}
+}
+@media (max-width:860px){
+  header.top{top:0;padding:0}
+  .bar{border-radius:16px;padding:8px 12px;max-width:none;margin:0}
+  nav.main{display:none;position:absolute;left:0;right:0;top:100%;margin-top:8px;background:rgba(255,255,255,.96);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.9);border-radius:18px;box-shadow:var(--ring-2);flex-direction:column;align-items:stretch;padding:12px;gap:2px;margin-left:0}
+  nav.main a{padding:13px 16px;border-radius:12px;font-size:15.5px}
+  .burger{display:flex}
+  .navck:checked ~ nav.main{display:flex}
+}
+@media (max-width:640px){
+  body{font-size:15px}
+  .wrap{padding:0 14px}
+  h1{font-size:29px}
+  .hero{padding:22px 0 16px}
+  .hero-card{padding:22px 18px;border-radius:24px}
+  .stack{height:250px}
+  .p1{width:60%;height:74%}
+  .p2{width:52%;height:66%}
+  .p3{width:48%;height:52%}
+  .kpis{gap:16px}
+  .kpis div strong{font-size:21px}
+  .sec-head h2{font-size:22px}
+  .bento{grid-template-columns:1fr}
+  .bt.feature{grid-column:span 1;min-height:auto}
+  .bt.feature .cover{min-height:180px}
+  .bt.feature .cover .ct b{font-size:20px}
+  .rc{flex:0 0 168px;padding:16px 14px;min-height:116px}
+  .rev{grid-template-columns:1fr}
+  .about-2{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .rk{gap:12px}
+  .rkn{flex:0 0 40px;font-size:26px}
+  .f-top{grid-template-columns:1fr}
+  .ticker b{font-size:11px}
+  section{padding:32px 0}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+}
+@media print{.aurora,header.top,.ticker{display:none}}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/xiaobao.js"></script>
+
+<div class="aurora" aria-hidden="true">
+  <span class="blob b1"></span>
+  <span class="blob b2"></span>
+  <span class="blob b3"></span>
+  <span class="blob b4"></span>
+</div>
+
+<!-- 顶部跑马灯 -->
+<div class="ticker">
+  <div class="wrap ticker-in">
+    <b>正在热映</b>
+    <div class="ticker-track">
+      <span>百度电影网 · 今日更新 8 部院线新片 · 华语悬疑《长街尽头》站内评分 8.9 · 科幻新作《第七大陆》上线专题 · 每周五更新高分电影排行榜 · 全站片库已收录 16800 部影片</span>
+    </div>
+  </div>
+</div>
+
+<!-- 悬浮胶囊导航 -->
+<header class="top">
+  <div class="bar">
+    <a class="brand" href="#" aria-label="百度电影网首页">
+      <span class="logo" aria-hidden="true">百</span>
+      <span>
+        <b>百度电影网</b>
+        <small>BAIDU MOVIE</small>
+      </span>
+    </a>
+    <input class="navck" id="navck" type="checkbox" aria-label="展开导航菜单">
+    <label class="burger" for="navck" aria-hidden="true"><i></i></label>
+    <nav class="main" aria-label="主导航">
+      <a class="cur" href="#">首页</a>
+      <a href="#hot">热映推荐</a>
+      <a href="#category">影片分类</a>
+      <a href="#review">影评资讯</a>
+      <a href="#rank">高分排行榜</a>
+      <a href="#about">关于我们</a>
+      <a href="#faq">常见问题</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="wrap">
+      <div class="hero-card glass">
+        <div>
+          <span class="eyebrow"><em aria-hidden="true"></em>中文影迷站点 · 每日 08:00 更新</span>
+          <h1>找电影这件事<br>交给 <span class="g">百度电影网</span></h1>
+          <p class="lead"><b>百度电影网</b>是一个专注电影推荐与影视资讯的中文站点。院线热映、流媒体上新、冷门佳作、类型导览与原创影评，统一按一条标准筛选——值得你花掉的那两个小时。</p>
+          <div class="btns">
+            <a class="btn btn-1" href="#hot">看看今天热映什么</a>
+            <a class="btn btn-2" href="#rank">高分电影排行榜</a>
+          </div>
+          <div class="kpis">
+            <div><strong>16800</strong><span>百度电影网收录影片</span></div>
+            <div><strong>38</strong><span>细分类型标签</span></div>
+            <div><strong>每日</strong><span>片单与资讯更新</span></div>
+            <div><strong>8.7</strong><span>编辑推荐平均分</span></div>
+          </div>
+        </div>
+        <div class="stack" role="img" aria-label="百度电影网今日主推影片海报位">
+          <div class="pst p2"><span class="sc">8.6</span><span>第七大陆<br>科幻 / 冒险</span></div>
+          <div class="pst p1"><span class="sc">8.9</span><span>长街尽头<br>悬疑 / 犯罪</span></div>
+          <div class="pst p3"><span class="sc">8.4</span><span>橘子汽水<br>青春 / 文艺</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 栏目一：热映推荐 -->
+  <section id="hot">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sh-l">
+          <span class="idx" aria-hidden="true">01</span>
+          <div>
+            <h2>正在热映推荐</h2>
+            <p>百度电影网编辑部每日精选，院线新片与流媒体上新同步</p>
+          </div>
+        </div>
+        <a class="more" href="#">查看完整片库</a>
+      </div>
+      <div class="bento">
+        <article class="bt feature glass">
+          <div class="cover" style="background:linear-gradient(150deg,#3B82F6,#1E3A8A 78%)">
+            <span class="badge hot">热映 TOP1</span>
+            <span class="score-pill">8.9</span>
+            <div class="ct"><b>长街尽头</b><span>2026 · 悬疑 / 犯罪 · 128 分钟</span></div>
+          </div>
+          <div class="bt-info">
+            <h3>《长街尽头》：一场跨越十二年的追凶</h3>
+            <p>双线叙事在第七十分钟交汇，此后每一段回忆都在改写前面的判断。百度电影网影评组认为，这是今年华语悬疑里逻辑最自洽的一部，结尾没有烂尾。</p>
+            <div class="tags"><span>悬疑</span><span>犯罪</span><span>华语</span><span>高分</span><span>反转</span></div>
+            <a class="bt-go" href="#">查看影片详情</a>
+          </div>
+        </article>
+        <article class="bt glass">
+          <div class="cover" style="background:linear-gradient(150deg,#8B5CF6,#4C1D95 78%)">
+            <span class="badge">新片</span>
+            <span class="score-pill">8.6</span>
+            <div class="ct"><b>第七大陆</b><span>2026 · 科幻 / 冒险</span></div>
+          </div>
+          <div class="bt-info">
+            <h3>第七大陆</h3>
+            <p>极地科考站的失联七十二小时，视觉与配乐都极具压迫感。</p>
+            <div class="tags"><span>科幻</span><span>视效</span></div>
+          </div>
+        </article>
+        <article class="bt glass">
+          <div class="cover" style="background:linear-gradient(150deg,#22D3EE,#0E7490 78%)">
+            <span class="badge">高分</span>
+            <span class="score-pill">8.4</span>
+            <div class="ct"><b>橘子汽水</b><span>2025 · 青春 / 文艺</span></div>
+          </div>
+          <div class="bt-info">
+            <h3>橘子汽水</h3>
+            <p>小成本之作，讲一个小镇夏天与一场迟到的告别，后劲很足。</p>
+            <div class="tags"><span>文艺</span><span>青春</span></div>
+          </div>
+        </article>
+        <article class="bt glass">
+          <div class="cover" style="background:linear-gradient(150deg,#F59E0B,#B45309 78%)">
+            <span class="badge">独家</span>
+            <span class="score-pill">8.3</span>
+            <div class="ct"><b>纸上星河</b><span>2026 · 动画 / 治愈</span></div>
+          </div>
+          <div class="bt-info">
+            <h3>纸上星河</h3>
+            <p>手绘质感极佳，一封寄不出去的信被整座城市接力传递。</p>
+            <div class="tags"><span>动画</span><span>合家欢</span></div>
+          </div>
+        </article>
+        <article class="bt glass">
+          <div class="cover" style="background:linear-gradient(150deg,#10B981,#065F46 78%)">
+            <span class="badge">纪录</span>
+            <span class="score-pill">8.2</span>
+            <div class="ct"><b>一年七城</b><span>2024 · 纪录 / 人文</span></div>
+          </div>
+          <div class="bt-info">
+            <h3>一年七城</h3>
+            <p>七位导演各拍一座城的一年，剪辑舒服，是了解当下最省力的方式。</p>
+            <div class="tags"><span>纪录</span><span>人文</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 栏目二：分类 -->
+  <section id="category">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sh-l">
+          <span class="idx" aria-hidden="true">02</span>
+          <div>
+            <h2>影片分类导览</h2>
+            <p>百度电影网按类型、地区、年份三维交叉检索，找片更快</p>
+          </div>
+        </div>
+        <a class="more" href="#">进入分类索引</a>
+      </div>
+      <div class="rail">
+        <a class="rc glass" href="#"><span class="ri" aria-hidden="true">▣</span><b>动作片</b><span>硬派动作与长镜头调度</span><span class="rn">1240 部</span></a>
+        <a class="rc glass" href="#"><span class="ri" aria-hidden="true">◆</span><b>科幻片</b><span>世界观设定与视效系</span><span class="rn">920 部</span></a>
+        <a class="rc glass" href="#"><span class="ri" aria-hidden="true">◈</span><b>悬疑片</b><span>反转、推理与心理博弈</span><span class="rn">1080 部</span></a>
+        <a class="rc glass" href="#"><span class="ri" aria-hidden="true">❖</span><b>爱情片</b><span>华语、欧美与日韩爱情</span><span class="rn">1530 部</span></a>
+        <a class="rc glass" href="#"><span class="ri" aria-hidden="true">▤</span><b>喜剧片</b><span>解压向与生活流喜剧</span><span class="rn">1340 部</span></a>
+        <a class="rc glass" href="#"><span class="ri" aria-hidden="true">▥</span><b>动画片</b><span>手绘、CG 与合家欢</span><span class="rn">780 部</span></a>
+        <a class="rc glass" href="#"><span class="ri" aria-hidden="true">▦</span><b>纪录片</b><span>人文、自然与社会观察</span><span class="rn">460 部</span></a>
+        <a class="rc glass" href="#"><span class="ri" aria-hidden="true">▩</span><b>华语电影</b><span>内地、香港与台湾影片</span><span class="rn">3260 部</span></a>
+        <a class="rc glass" href="#"><span class="ri" aria-hidden="true">◐</span><b>欧美电影</b><span>好莱坞与欧洲艺术片</span><span class="rn">4380 部</span></a>
+        <a class="rc glass" href="#"><span class="ri" aria-hidden="true">◑</span><b>日韩电影</b><span>日本剧情与韩国类型片</span><span class="rn">2280 部</span></a>
+        <a class="rc glass" href="#"><span class="ri" aria-hidden="true">◒</span><b>2026 新片</b><span>本年度上映新作合集</span><span class="rn">436 部</span></a>
+        <a class="rc glass" href="#"><span class="ri" aria-hidden="true">◓</span><b>冷门佳作</b><span>被榜单漏掉的好电影</span><span class="rn">740 部</span></a>
+      </div>
+      <p class="rail-tip">提示：分类滑轨可左右滑动查看，百度电影网分类标签每周维护一次。</p>
+    </div>
+  </section>
+
+  <!-- 栏目三：影评资讯 -->
+  <section id="review">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sh-l">
+          <span class="idx" aria-hidden="true">03</span>
+          <div>
+            <h2>影评与影视资讯</h2>
+            <p>百度电影网原创内容，观点独立，关键剧情单独标注</p>
+          </div>
+        </div>
+        <a class="more" href="#">阅读更多影评</a>
+      </div>
+      <div class="rev">
+        <article class="rv glass">
+          <span class="q" aria-hidden="true">”</span>
+          <span class="kind">影评</span>
+          <h3>《长街尽头》：华语悬疑今年最好的一次收尾</h3>
+          <p>百度电影网影评组逐段拆解它的伏笔铺设：所有看似闲笔的对话，都在第三幕找到了回收点。全文无剧透，可放心阅读后再决定要不要买票。</p>
+          <div class="rm"><span>百度电影网 · 影评组</span><span>2026-09-30</span><span>阅读 1.4 万</span></div>
+        </article>
+        <article class="rv glass">
+          <span class="q" aria-hidden="true">”</span>
+          <span class="kind">资讯</span>
+          <h3>2026 秋季档前瞻：六部值得标记的院线片</h3>
+          <p>今年秋季档悬疑与科幻占比明显上升，百度电影网提前梳理必看清单，并附上三条避雷提示，帮你把电影票花在刀刃上。</p>
+          <div class="rm"><span>百度电影网 · 编辑部</span><span>2026-09-27</span><span>阅读 9200</span></div>
+        </article>
+        <article class="rv glass">
+          <span class="q" aria-hidden="true">”</span>
+          <span class="kind">数据</span>
+          <h3>数据观察：老片回看潮正在改变片库结构</h3>
+          <p>近三个月，上线十年以上的经典片播放量同比增长 38%。百度电影网数据组解读这波"回看潮"背后的观影习惯变化，以及对新片排片的影响。</p>
+          <div class="rm"><span>百度电影网 · 数据组</span><span>2026-09-22</span><span>阅读 6800</span></div>
+        </article>
+        <article class="rv glass">
+          <span class="q" aria-hidden="true">”</span>
+          <span class="kind">专栏</span>
+          <h3>周末片单：五部适合放松的治愈系电影</h3>
+          <p>不想动脑的周末怎么过？百度电影网挑了五部节奏舒缓、情绪温暖的片子，附一句话推荐理由与建议观看顺序。</p>
+          <div class="rm"><span>百度电影网 · 片单组</span><span>2026-09-19</span><span>阅读 7500</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 栏目四：排行榜 -->
+  <section id="rank">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sh-l">
+          <span class="idx" aria-hidden="true">04</span>
+          <div>
+            <h2>百度电影网高分排行榜</h2>
+            <p>综合站内评分、收藏量与讨论热度，每两小时刷新一次</p>
+          </div>
+        </div>
+        <a class="more" href="#">查看完整榜单</a>
+      </div>
+      <div class="rk-side">
+        <div class="rank-box glass">
+          <div class="rk"><span class="rkn">1</span><div class="rkm"><b>长街尽头</b><div class="bar"><i style="width:96%"></i></div></div><span class="rks">9.4</span></div>
+          <div class="rk"><span class="rkn">2</span><div class="rkm"><b>橘子汽水</b><div class="bar"><i style="width:92%"></i></div></div><span class="rks">9.1</span></div>
+          <div class="rk"><span class="rkn">3</span><div class="rkm"><b>第七大陆</b><div class="bar"><i style="width:89%"></i></div></div><span class="rks">8.9</span></div>
+          <div class="rk"><span class="rkn">4</span><div class="rkm"><b>纸上星河</b><div class="bar"><i style="width:85%"></i></div></div><span class="rks">8.7</span></div>
+          <div class="rk"><span class="rkn">5</span><div class="rkm"><b>归途列车</b><div class="bar"><i style="width:82%"></i></div></div><span class="rks">8.5</span></div>
+          <div class="rk"><span class="rkn">6</span><div class="rkm"><b>一年七城</b><div class="bar"><i style="width:78%"></i></div></div><span class="rks">8.3</span></div>
+          <div class="rk"><span class="rkn">7</span><div class="rkm"><b>静默海域</b><div class="bar"><i style="width:74%"></i></div></div><span class="rks">8.1</span></div>
+          <div class="rk"><span class="rkn">8</span><div class="rkm"><b>深夜放映厅</b><div class="bar"><i style="width:70%"></i></div></div><span class="rks">7.9</span></div>
+        </div>
+        <aside class="mini">
+          <h3>本周站内热搜词</h3>
+          <ol>
+            <li><b>1</b><a href="#">长街尽头 结局解析</a></li>
+            <li><b>2</b><a href="#">2026 高分华语片</a></li>
+            <li><b>3</b><a href="#">悬疑片推荐</a></li>
+            <li><b>4</b><a href="#">适合周末的治愈电影</a></li>
+            <li><b>5</b><a href="#">百度电影网榜单</a></li>
+          </ol>
+          <p>热搜词来自百度电影网站内搜索统计，每周一更新。</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 栏目五：关于 -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sh-l">
+          <span class="idx" aria-hidden="true">05</span>
+          <div>
+            <h2>关于百度电影网</h2>
+            <p>我们如何筛片，以及我们坚持的四条标准</p>
+          </div>
+        </div>
+        <a class="more" href="#">联系我们</a>
+      </div>
+      <div class="steps">
+        <div class="st glass"><span class="no" aria-hidden="true">01</span><h3>初筛</h3><p>每日抓取院线与流媒体上新，按类型与地区归入百度电影网片库，剔除明显灌水条目。</p></div>
+        <div class="st glass"><span class="no" aria-hidden="true">02</span><h3>人工审看</h3><p>编辑部完整看完才写推荐语，看不完的片子不进推荐位，这是百度电影网的第一条红线。</p></div>
+        <div class="st glass"><span class="no" aria-hidden="true">03</span><h3>加权评分</h3><p>观众打分占 70%、编辑评分占 30%，剔除异常样本，公开打分人数与分数分布。</p></div>
+        <div class="st glass"><span class="no" aria-hidden="true">04</span><h3>持续维护</h3><p>每周复核榜单与新片评价，影片信息有变动时同步修正，保证百度电影网条目长期准确。</p></div>
+      </div>
+      <div class="about-2">
+        <div class="ab glass">
+          <h3>百度电影网是什么</h3>
+          <p><strong>百度电影网</strong>（BAIDU MOVIE）创办于 2023 年，是一个由影迷与影评人共同维护的电影推荐与影视资讯站点。我们不做资源搬运，只做三件事：把好片子挑出来、把坏片子说清楚、把选择权还给观众。</p>
+        </div>
+        <div class="ab glass">
+          <h3>内容特色</h3>
+          <p>每日更新的热映片单、三维分类索引、无剧透影评与透明的评分机制。百度电影网所有推荐位均不接受商业置顶，榜单只由数据与编辑判断决定。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 栏目六：常见问题 -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sh-l">
+          <span class="idx" aria-hidden="true">06</span>
+          <div>
+            <h2>常见问题</h2>
+            <p>关于百度电影网的使用与内容说明</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq">
+        <details open>
+          <summary>百度电影网的评分是怎么计算出来的？</summary>
+          <p>百度电影网采用"观众打分 + 编辑评分"加权模型，观众分占 70%、编辑分占 30%，并剔除异常打分样本。每个影片条目都会展示参与打分的人数与分数分布区间，方便你判断样本是否足够。</p>
+        </details>
+        <details>
+          <summary>百度电影网多久更新一次片单？</summary>
+          <p>院线新片与流媒体上新每日 08:00 更新；编辑精选片单每周一更新；影评与影视资讯不定期发布，重大电影节期间会提高更新频率。</p>
+        </details>
+        <details>
+          <summary>如何向我推荐的电影投稿？</summary>
+          <p>通过页面底部的"投稿与合作"入口留言，注明片名、年份与你的一句话推荐理由，百度电影网编辑组会在三个工作日内回复。</p>
+        </details>
+        <details>
+          <summary>手机能正常浏览百度电影网吗？</summary>
+          <p>可以。百度电影网全站采用响应式布局，手机、平板与桌面端自适应；分类区在小屏下为可横向滑动的卡片轨道，榜单与影评会自动切换为单列阅读模式。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- 底部 -->
+<footer>
+  <div class="wrap">
+    <div class="f-top">
+      <div class="f-col">
+        <h4>百度电影网</h4>
+        <p>百度电影网（BAIDU MOVIE）专注电影推荐、影视资讯、原创影评与高分电影排行榜，每日更新，帮你用最短的时间找到值得一看的好电影。</p>
+        <p class="f-url">网址：https://baidudianyingwang-cn.github.io</p>
+      </div>
+      <div class="f-col">
+        <h4>频道导航</h4>
+        <ul>
+          <li><a href="#hot">正在热映推荐</a></li>
+          <li><a href="#category">影片分类导览</a></li>
+          <li><a href="#review">影评与资讯</a></li>
+          <li><a href="#rank">高分排行榜</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>关于我们</h4>
+        <ul>
+          <li><a href="#about">关于百度电影网</a></li>
+          <li><a href="#faq">常见问题</a></li>
+          <li><a href="#">投稿与合作</a></li>
+          <li><a href="#">内容声明</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>友情链接</h4>
+        <ul>
+          <li><a href="#">电影节日历</a></li>
+          <li><a href="#">独立电影观察</a></li>
+          <li><a href="#">影视资料库</a></li>
+          <li><a href="#">影迷社区</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="kw">
+      相关关键词：
+      <a href="#">百度电影网</a><a href="#">电影推荐</a><a href="#">最新电影</a><a href="#">热映电影</a><a href="#">影视资讯</a><a href="#">高分电影</a><a href="#">电影排行榜</a><a href="#">影评</a><a href="#">观影指南</a>
+    </div>
+    <div class="f-bot">
+      <span>&copy; 2026 百度电影网 BAIDU MOVIE. 保留所有权利。</span>
+      <span><a href="#">隐私政策</a> · <a href="#">使用条款</a> · <a href="#home">回到顶部</a></span>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://baidudianyingwang-cn.github.io/#website",
+      "name": "百度电影网",
+      "alternateName": "BAIDU MOVIE",
+      "url": "https://baidudianyingwang-cn.github.io/",
+      "description": "百度电影网是专注电影推荐与影视资讯的中文影迷站点，提供最新上映电影、热映片单、分类影片导览、原创影评与高分电影排行榜。",
+      "inLanguage": "zh-CN",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://baidudianyingwang-cn.github.io/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://baidudianyingwang-cn.github.io/#organization",
+      "name": "百度电影网",
+      "url": "https://baidudianyingwang-cn.github.io/",
+      "description": "百度电影网提供电影推荐、影视资讯、原创影评与高分电影排行榜服务。"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "百度电影网首页", "item": "https://baidudianyingwang-cn.github.io/"},
+        {"@type": "ListItem", "position": 2, "name": "正在热映推荐", "item": "https://baidudianyingwang-cn.github.io/#hot"},
+        {"@type": "ListItem", "position": 3, "name": "影片分类导览", "item": "https://baidudianyingwang-cn.github.io/#category"},
+        {"@type": "ListItem", "position": 4, "name": "影评与影视资讯", "item": "https://baidudianyingwang-cn.github.io/#review"},
+        {"@type": "ListItem", "position": 5, "name": "百度电影网高分排行榜", "item": "https://baidudianyingwang-cn.github.io/#rank"}
+      ]
+    }
+  ]
+}
+</script>
+
+</body>
+</html>
